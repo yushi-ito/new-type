@@ -1,14 +1,17 @@
-import enblem from './roma_emblem.png';
-import './App.css';
+/* eslint-disable arrow-body-style */
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={enblem} className="App-logo" alt="logo" />
-      </header>
-    </div>
-  );
+// eslint-disable-next-line react/function-component-definition
+const App = () => {
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/home" element={<Home />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App;
