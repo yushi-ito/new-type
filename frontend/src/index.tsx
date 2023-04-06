@@ -2,11 +2,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SidebarMenu from 'components/organisms/sidebar/sidebar';
-import Header from 'components/organisms/header/header';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Login from "./pages/login";
+import Login from "./pages/Login/Login";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +15,11 @@ const login = true;
 root.render(
   <React.StrictMode>
     { login ?
-      <><App /><SidebarMenu /><Header /></>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<App />} />
+        </Routes>
+      </BrowserRouter>
     :
       <BrowserRouter>
           <Routes>

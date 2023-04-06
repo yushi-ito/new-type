@@ -1,22 +1,50 @@
-/* eslint-disable react/button-has-type */
-import Sidebar from 'react-sidebar';
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import EditProfile from '../../molecules/EditProfile/EditProfile';
+import ListComment from '../../molecules/ListComment/ListComment';
 
 // eslint-disable-next-line react/function-component-definition
-const SidebarMenu = () => (
-      <Sidebar
-        sidebar={
-          <div style={{marginTop: '80px', textAlign: 'center'}}>
-            <div style={{marginBottom: '7px', fontSize: '25px'}}>
-                <a style={{color: '#FFF', textDecoration: 'none', fontWeight: 'bold'}} href='home'>home</a>
-            </div>
-            {/* <div style={{marginBottom: '7px', fontSize: '25px'}}><a style={{color: '#FFF', textDecoration: 'none', fontWeight: 'bold'}} href='aaas'>サイドバー</a></div>
-            <div style={{marginBottom: '7px', fontSize: '25px'}}><a style={{color: '#FFF', textDecoration: 'none', fontWeight: 'bold'}} href='aaas'>サイドバー</a></div> */}
-          </div>
-        }
-        open
-        docked
-        styles={{ sidebar: { background: "#FFD700", width: '200px'} }}
-      />
-    )
+const RightBarMenu = () => {
+  const [menuState, setmenuState] = useState('List');
 
-export default SidebarMenu;
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setmenuState(newValue);
+  };
+
+  return (
+    <div
+    style={{
+      width: '25%' ,
+      position: 'absolute',
+      right: '0',
+      top: '0',
+      backgroundColor: '#DDDDDD',
+      overflow: 'scroll',
+      height: '100%',
+    }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          marginTop: '65px',
+          backgroundColor: '#FFF',
+          width: '100%',
+        }}
+      >
+        <Tabs value={menuState} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="List" value="List" sx={{width: '50%'}}/>
+          <Tab label="Edit" value="Edit" sx={{width: '50%'}} />
+        </Tabs>
+      </Box>
+      { menuState === 'List' ?
+        <ListComment />
+      :
+        <EditProfile />
+      }
+    </div>
+  )
+}
+
+export default RightBarMenu;
